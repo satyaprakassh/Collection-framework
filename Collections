@@ -1,0 +1,235 @@
+/*
+
+COLLECTION FRAMEWORK
+--------------------
+
+
+
+Limitations of Arrays :
+-----------------------
+
+(1) Arrays Are fixed in size :
+- Once we declare an array with some size, after then we can't increase or decrease
+that size on requirement. So to use array, we should compulsory know the size in 
+advance.
+
+ex: int [] i=new int[5];
+    i[6]=12;// error. ArrayIndexOutOfBoundsException;
+
+(2) Can hold only homogeneous elements :
+- Once we declare an array of certain type then that array can only contain the same
+type of elements. If we try to put any other type of elements to that array than we 
+will get compile time error.
+
+ex: Student [] s=new Student[5];
+    s[0]=new Student();// valid
+    s[3]=new Integer(10);//  invalid
+    s4[]="sdfs";// invalid
+    
+                            - But there is one exception where an array can hold
+heterogeneous elements using Object class as array_type.
+
+ex:   Object [] o=new Object[10];
+        o[0]=new Student();// valid
+        o[3]=new Test();// valid
+        o[5]="kkkkkkk";// valid
+
+
+(3) doesn't support inbuilt methods :
+- Arrays hsvan't any inbuilt method support. So for every time, we have to provide 
+the required logics, which may increase the complexity of the programs and decrease
+the performance.
+
+- To overcome the above mentioned issues we should go for Collection framework.
+*/
+
+class IssuesWithArrays
+{
+    public static void main (String[] args)
+    {
+        String [] arr=new String[5];
+        System.out.println(arr);
+        arr[4]="45";
+        System.out.println(arr[4]);
+        arr=new String[6];//here we creating another array but not increasing its size
+        System.out.println(arr);
+        System.out.println(arr[3]);
+    }
+}
+
+/*
+
+Advantages of Collection over arrays :
+
+(1) Growable in nature:
+- Collections are Growable in nature i.e based on requirement we can incease or decrease
+the size.
+
+(2) Can hold both homogeneous & heterogeneous elements:
+
+(3) Supports inbuilts methods:
+-Every Collections class is implemented based on some standard data structure. Hence
+for every requirment, readymade method support is available.
+
+
+-note-
+
+- performance wise Arrays are better than Collections.
+- Arrays can hold both primitives and objects but Collections can hold only objects.
+
+
+
+
+Collection framework:
+---------------------
+
+- It is a framework which contains several predefined classes and interfaces which
+are used to represent a group of individual objects as a single entity.
+
+
+
+9 key interfaces of Collection framework:
+-----------------------------------------
+
+(1) Collection
+
+(2) List
+
+(3) Set
+
+(4) SortedSet
+
+(5) NavigableSet
+
+(6) Queue
+
+(7) Map
+
+(8) SortedMap
+
+(9) NavigableMap
+
+
+Brief introduction of the above interfaces:
+-------------------------------------------
+(1) Collection interface : This interface contains the most common methods which are
+applicable for any Collection object. In general, Collection interface is considered
+as the root interface of Collection framework.
+
+Difference between Collection and Collections :   Collection is an interface whereas
+Collections is a class present inside java.util package.
+
+
+
+(2) List interface : It is the child interface of Collection  interface.
+
+-    In which circumstances should we use List : If we want to represent a group of 
+individual objects as a single entity where duplicates are allowed & insertion order
+must be preserved then we should go for List.
+
+- List interface has following utility classes :
+- ArrayList
+- LinkedList
+- Vector
+- Stack
+
+
+(3) Set interface:  It is the direct child interface of Collection.
+
+-   In which circumstances should we use Set : If we want to represent a group of
+individual objects as a single entity where duplicates aren't allowed and insertion
+order isn't required then we should go for Set interface.
+
+- Set has following utility classes :
+-HashSet
+-LinkedHashSet
+
+
+
+(4) SortedSet interface : It is the direct child interface of Set interface.
+
+-   In which circumstances should we use Set : If we want to represent a group of
+individual objects as a single entity where duplicates aren't allowed but all objects
+must be inserted according to specific sorting order then we should go for SortedSet
+interface.
+
+- It has no direct child class.
+
+
+(5) NavigableSet : It is the direct child interface of SortedSet. It contans several
+methods for navigable purposes.
+
+- It has a child class :   TreeSet
+
+
+
+
+Queue interface : It is the child interface of Collection .
+
+-   In which circumstances should we use Set : If we want to represent a group of
+objects prior to processing then we should go for Queue interface.
+
+- Usually, Queue follows FIFO algorithm but based on our requirement, we can implement
+our own priority order also.
+
+ex: Before sending mails, all mail-ids should be stored in some data structure. The
+order in which we add the mail-ids, in the same order messeges are sent. In such 
+circumstances Queue is best choice to use.
+
+- The following are the implementation classes :
+
+- PriorityQueue
+- BlockingQueue
+- PriorityBlockingQueue
+- LinkedBlockingQueue
+etc etc.
+
+-note-
+
+- All the interfaces from (1-6) are meant for representinng a group of individual 
+objects.
+- If we want to represent a group of objects as key-value pairs then we should go
+for Map(7-9).
+
+
+
+
+(7) Map interface : Map isn't the child interface of Collection.
+
+In which circumstances we should use Map : If we want to reprent a group of objects
+as key-value pairs then we should go for Map.
+
+- Both key & value are objects only. Duplicate keys aren't allowed but values can be
+Duplicated.
+
+
+- The following are the implementation classes :
+
+- HashMap
+- LinkedHashMap
+- WeakHashMap
+- IdentityHashMap
+- Dictonary
+- Hashtable
+- Properties
+
+
+
+(8) SortedMap interface :  It is the child interface of Map.
+
+- In which circumstances we should use Map : If we want to reprent a group of objects
+as key-value pairs according to some sortinng order of keys then we should go for 
+Map.
+
+-note- 
+
+- In SortedMap, the Sirting should be based on keys but not on values.
+
+
+
+(9)NavigableMap : It is the child interface of SortedMap. It defines several methods
+for navigable purposes.
+
+- It has a implemetation class : TreeMap 
+*/
+
