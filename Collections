@@ -232,4 +232,177 @@ for navigable purposes.
 
 - It has a implemetation class : TreeMap 
 */
-
+import java.util.*;
+class CollectionConcepts
+{
+     /*properties of ArrayList:
+     --------------------------
+        - It is resizable ie unlike Arrays, we can increase and decrease the size of
+        the list.
+        - duplicate objects are allowed to be stored.
+        - Insertion order is preserved.
+        */
+         /*constructors :
+        ----------------
+        (1) ArrayList al=new ArrayList() : creates an deault AL object with initial
+        capacity 10. When it reaches its maximum capacity then a new object is created
+        with new capacity= previous capacity*(3/2) +  1   and the previous object is
+        destroyed(goes to garbage collection).
+        */
+        /*
+        public static void ALConstrucotr1()
+        {
+            ArrayList al1=new ArrayList();
+            System.out.println(al1.size());//o|p : 0  ,but why not showing 10 as size ?
+            al1.add(10);
+            System.out.println(al1.size());
+            System.out.println(al1);
+            al1.add("rrr");
+            al1.remove(0);
+            System.out.println(al1);
+        }
+         /*
+        (2)ArrayList al=new ArrayList(int capacity) : creates an AL object with some
+        initial capacity.
+         *//*
+         public static void ALConstrucotr2()
+         {
+             ArrayList al2=new ArrayList(10);
+             System.out.println(al2.size());// 1
+             for(int i=0;i<=9;i++)
+             {
+                 al2.add(i);
+             }
+             al2.add(20);
+             al2.remove(5);
+             System.out.println(al2.size());// 11
+             System.out.println(al2);
+          }
+           /*
+         (3) ArrayList al=new ArrayList(collection c) : creates an AL object for any
+         Collection object ie this constructor is used for interconversion of any 
+         Collection object to AL object.
+         *//*
+         public static void ALConstrucotr3()
+         {
+             Vector v1=new Vector();
+             v1.addElement("zzz");
+             v1.addElement("hhh");
+             ArrayList al3=new ArrayList(v1);
+             System.out.println(al3.size());
+             System.out.println(al3);
+          }
+        /*Properties of LinkedList :
+        ----------------------------
+        - It supports double LinkedList.
+        - duplicates are allowed.
+        - Insertion order is preserved.
+        -It implements Serializable and Cloneable interface but not RandomAccess.
+        */
+        /*constructors :
+        (1) LinkedList ll=new LinkedList() : creates an empty LL object.
+        (2) LinkedList l=new LinkedList(Collection c) : interconversion of any collection obj
+        to LL object.
+        *//*
+        static void operateOnLL()
+        {
+            LinkedList l=new LinkedList();
+            l.add(50);
+            l.add("t");
+            l.add(null);
+            l.removeFirst();
+            l.set(2,"k");
+            System.out.println(l);
+        }
+        /*properties of Vector :
+        ------------------------
+        - resizable in nature.
+        - Insertion order is preserved.
+        - duplicates are allowed.
+        - It implements Serializable, Cloneable and also RandomAccess interface.
+        - Every method of Vactor class is synchronized. So Vactor objects are thread safe.
+        */
+        /*constructors:
+        ---------------
+        (1) Vector v=new Vector(int initial capacity) 
+        (2) Vector v=new Vector(int initial capacity,int incremental_capacity) : creates a
+        Vector obj with some initial capacity. When it reches its maximum capacity then its
+        its capacity is increased by the provied value. If it again reaches its maximum 
+        capacity then it further increases its capacity and so on.
+        (3) Vector v=new Vector(collection c) : used for interconversion.
+        *//*
+        static void Vconstructor2()
+        {
+            Vector v1=new Vector(5,2);
+            System.out.println(v1.capacity());
+            for(int i=1;i<=5;i++)
+            {
+                v.add(i);
+            }
+            v.add("hhh");
+            v.add("shs");
+            v.add("mmm");
+            System.out.println(v1.capacity());
+        }
+        /*
+        Cursors of java : If we want to get objects one by one from the Collection then Cursors
+        are used. There are 3 types of cursors.
+        
+        (1) Enumeration : Used to get the objects of Legacy Collection classes like Vector.
+        
+        How to create Enumeration object : by using element() method.
+        syntax : public Enumeration elements()*//*
+        public static void enumeration()
+        {
+            Vector v=new Vector();
+            for(int i=10;i<=100;i++)
+            {
+                if(i%10==0)
+                {
+                    v.addElement(i);
+                }
+            }
+            System.out.println(v);
+            
+            Enumeration e=v.elements();
+            while(e.hasMoreElement())
+            {
+                Integer i=(Integer)e.nextElement();
+                if(i%20==0)
+                {
+                    System.out.println(i+" ");
+                }
+            }
+            System.out.println(v);
+        }
+        /*
+        disadvantages of Enumeration : we can apply Enumeration objects only for legacy classes
+        - we can get only read access , can't perform remove operations.
+        
+        To overcome theh above problems we should use Iteration*/
+        /*(2) Iteration :  This is universal cursor object so we can apply to any Collection
+        object.
+        - We can perform both read & remove operations.
+        
+        How to get Iterator object : by using iterator() method
+        syntax : public Iterator iterator()
+        */
+        public static void getIteratorObj()
+        {
+            ArrayList <String>al=new ArrayList<String>();
+            al.add("a");
+            al.add("b");
+            al.add("c");
+            al.add("d");
+            Iterator i=al.iterator();
+            Object obj=i.next();
+            i.remove();
+            System.out.println(obj);
+            System.out.println(al);
+        }
+    public static void main (String[] args)
+    
+    {
+        CollectionConcepts.getIteratorObj();
+    }
+}
