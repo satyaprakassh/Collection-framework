@@ -380,7 +380,8 @@ class CollectionConcepts
         - we can get only read access , can't perform remove operations.
         
         To overcome theh above problems we should use Iteration*/
-        /*(2) Iteration :  This is universal cursor object so we can apply to any Collection
+        /*(2) Iteration :  
+        - This is universal cursor object so we can apply to any Collection
         object.
         - We can perform both read & remove operations.
         
@@ -404,5 +405,166 @@ class CollectionConcepts
     
     {
         CollectionConcepts.getIteratorObj();
+    }
+}
+import java.util.*;
+class CursorsOfJava
+{
+    /*
+    (3) ListIterator :
+    - It is child Interface of Iterator.
+    - It is applicable only for List objects.
+    - It can move towards both forward and backward directions.
+    - It is used to perform the following operatiions :
+    (1)read  (2)remove  (3) replacement  (4) addition of new elements
+    
+    syntax :   public ListIterator listIterator();
+    
+    How to get ListIterator Object : ListIterator li=l.listIterator(), where l : any List object.
+    */
+    public static void performLIFunctions()
+    {
+        ArrayList<String> al=new ArrayList<String>();
+        al.add("a");
+        al.add("b");
+        al.add("c");
+        al.add("10");
+        System.out.println(al);
+        ListIterator li=al.listIterator();
+        System.out.println(li.hasPrevious());
+        while(li.hasNext())
+        {
+            //System.out.println(li.previous());
+            String str=(String)li.next();
+            //System.out.println(str);
+           
+            if(str.equals("10"))
+            {
+                li.set("100");
+            }
+             else if(str.equals("c"))
+            {
+                li.add("ccc");
+            }
+            else if(str.equals("a"))
+            {
+                li.remove();
+            }
+        }
+        while(li.hasPrevious()==true)
+        {
+            System.out.println(li.previous());
+        }
+        System.out.println(al);
+    }
+    public static void main (String[] args) {
+        CursorsOfJava.performLIFunctions();
+    }
+}
+import java.util.*;
+class SetConcepts
+{
+    /*Set :
+    -------
+    - If we want to represent a group of elements as a single entity where duplicates are not
+    allowed and insertion order isn't preserved then we should go for Set.
+    */
+    /*
+    HashSet class :
+    - duplicates not allowed.
+    - Heteorgenous objects allowed.
+    - Insertion order isn't preserved because objects are inserted based on hashcode.
+    - It implements Serializable, Cloneable but not RandomAccess.
+    
+    note: if we add duplicate elements to HashSet object then we won't get any compile time or
+    runtime errors rather the add() method  will simply return false i.e the duplicate element
+    will not be added.
+    */
+
+    public static void aboutHashSetClass()
+    {
+        HashSet hs=new HashSet(6,0.5f);// 1st arg :initial capacity &   2nd arg:filled ratio
+        /*filled ratio is the range until which the objs are inserted. For the above constructor
+        //3 elements can be filled and after crossing this range , a new obj will be created.*/
+        
+        System.out.println(hs.size());// instead of 3 , the result shows 0. why ???
+        
+        hs.add("A");
+        hs.add("B");
+        hs.add(10);
+        hs.add(null);
+        hs.add(true);
+        hs.add(20);
+        hs.add("C");
+        hs.add("D");
+        hs.add("E");
+        hs.add("A");
+        System.out.println(hs);// we can't expect the exact output because objs are inserted
+        //based on hashcode.
+        
+    }
+    /*
+    LinkedHashSet class : It is almost same as HashSet class. But it has 2 differences :
+    - Its underlying data structure is LinkedList and hashtable.
+    - Insertion order is preserved i.e the elements will be returned in which order these are
+    //inserted.
+    
+    Note: In general LHS is best coice in developing cache memory based appications.
+    */
+    public static void aboutLinkedHashSetClass()
+    {
+        LinkedHashSet lhs=new LinkedHashSet();
+        lhs.add("A");
+        lhs.add("B");
+        lhs.add("C");
+        lhs.add(25);
+        lhs.add("D");
+        lhs.add("E");
+        lhs.add(50);
+        lhs.add("A");
+        System.out.println(lhs);
+        lhs.clear();
+        System.out.println(lhs);
+    }
+    /*
+    TreeSet class :
+    - The underlying data structure is balanced tree.
+    - duplicate objects are not allowed.
+    - Only homogenous objects are allowed otherwise we will get compile time error 
+    saying :ClassCatchedException.
+    - Objects are inserted according to default or customized sorting order.
+    - It implements Serializzable , Cloneable but not RandomAccess.
+    
+    note :
+    - If we depend on default sorting order then those objects must be homogenous and
+    Comparable otherwise we will get CCE.
+    
+    The objects are said to be comaparable if the corresponding class implements Comparable 
+    interface. String class and all Wrapper classes objects are Comparable as those classes
+    implement Comparable interface. But StringBuffer objects are not Comparable as this class
+    doesn't implements Comparable interface.
+    */
+    public static void aboutTreeSetClass()
+    {
+        TreeSet ts1=new TreeSet();
+        // these elements are  Comparable & inserted according to default sorting order.
+        ts1.add(10);
+        ts1.add(20);
+        ts1.add(30);
+        ts1.add(40);
+        ts1.add(50);
+        System.out.println(ts1);
+        
+        
+        TreeSet ts2=new TreeSet();
+        //the following elements will lead to CCE because the following objs aren't Comparable
+        //ts2.add(new StringBuffer("jkf"));
+        //ts2.add(new StringBuffer("hhh"));
+        //Exception in thread "main" java.lang.ClassCastException: java.lang.StringBuffer cannot be cast to java.lang.Comparable
+    }
+    public static void main (String[] args) {
+        //SetConcepts.aboutHashSetClass();
+       //SetConcepts.aboutLinkedHashSetClass();
+       SetConcepts.aboutTreeSetClass();
     }
 }
