@@ -857,3 +857,151 @@ class TreeSetDemo7
         
     }
 }
+
+/*
+Hashtable class
+---------------
+
+- The underlying data structure is Hashtable.
+- intertion order isn't preserved i.e it is based on hashcode.
+- duplecate keys aren't allowed but values can be duplecated.
+- Heterogenous objects are allowed both for key and values.
+- null is not allowed both key and value.
+- Every method present inside the Hashtable is synchronized, hence Hashtable objects are thread safe.
+- Hashtable is best suitable if our frequent operation is search operation.
+
+*/
+
+// we can provide customized hashcode for the Hashtable objects.
+import java.util.*;
+class Test
+{
+    int counter;
+    Test(int counter)
+    {
+        this.counter=counter;
+    }
+    public int hashcode()
+    {
+        return counter;
+    }
+    public String toString()
+    {
+        return ""+counter;
+    }
+}
+class HashtableDemo
+{
+    public static void main (String[] args)
+    {
+        Hashtable ht=new Hashtable();
+        ht.put(new Test(5),"qqqq");
+        ht.put(new Test(2),"rrrr");
+        ht.put(new Test(6),"ffff");
+        ht.put(new Test(15),"tttt");
+        ht.put(new Test(23),"ffff");
+        ht.put(new Test(16),"tttt");
+        //ht.put("hghfjfj","jfdjfdj");// Heterogenous elements are allowed both for key and value.
+       // ht.put(null,"ffff");//null isn't allowed both for key & value.
+        System.out.println(ht);
+    }
+}/*
+/*Properties class
+------------------
+
+- This class is mainly used to get the content of a properties file through Properties object then update
+that content and then store that file.
+
+- Properties objects hold key-value pairs where both key and the value are String type.
+
+*/
+import java.util.*;
+import java.io.*;
+class PropertiesDemo
+{
+    public static void main (String[] args)
+    {
+        // everything i am practicing is on this online IDE.
+        //because I haven't install jdk so filehandling is not possible.
+        Properties p=new Properties();
+        FileInputStream fis=new FileInputStream("abc.properties");
+        p.load(fis);
+        System.out.println(p);
+        String s=p.getProperty("aaa");
+        System.out.println(s);
+        p.setProperty("ooo","123hhhh@999");
+        FileOutputStream fos=new FileOutputStream("abc.properties");
+        p.store(fos,"updated by me");
+    }
+}
+/*
+Queue interface
+---------------
+
+- If we want to represent a group of individual objects prior to processing then we should go for Queue.
+
+- For example, before sending sms, all mobile numbers have to be stored in some data structure. The order
+in which the mobile numbers are added in the same order the sms should be delivered. For this FIFO re-
+quirement, Queue is the best choice.
+
+- Usually Queue followes FIFO order but based on our requirement , we can provede our own priority order
+also.
+
+Note: LinkedList based implementation of Queue always follows FIFO order.
+
+
+priorityQueue class
+-------------------
+
+- If wee want to represent a group of individual objects prior to processing according to some sorting 
+order then we should go for PriorityQueue.
+
+- The priority can default or customized.
+
+- If we want default natural sorting order then the objects should be homogeneous and Comparable.
+
+- If we want our own sorting order then we can use Comparator.
+*/
+//ex for default natural sorting 
+import java.util.*;
+/*
+class PrioriryQueueDemo
+{
+    public static void main (String[] args) {
+        PriorityQueue p=new PriorityQueue();
+        for(int i=1;i<=10;i++)
+        {
+            p.offer(i);
+        }
+        System.out.println(p);
+        System.out.println(p.poll());
+        System.out.println(p);
+        
+    }
+}
+*/
+//ex for customized sorting
+
+class Mycomparator implements Comparator
+{
+    public int compare(Object o1,Object o2)
+    {
+        String s1=o1.toString();
+        String s2=o2.toString();
+        return s2.compareTo(s1);
+    }
+}
+class PriorityQueueDemo2
+{
+    public static void main (String[] args)
+    {
+        PriorityQueue p=new PriorityQueue(10,new Mycomparator());
+        p.offer("aaa");
+        p.offer("aab");
+        p.offer("ggg");
+        p.offer("qqq");
+        p.offer("bbb");
+        p.offer("mmm");
+        System.out.println(p);
+    }
+}
