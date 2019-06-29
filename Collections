@@ -1006,6 +1006,184 @@ class PriorityQueueDemo2
     }
 }
 /*
+Collections class
+=================
+
+- This class is present inside java.util package.
+- It has several utility methods for Collection objects. Those mehtods are generally used for sorting
+and searching purposes.
+
+- For sorting, it has the following 2 methods :
+-----------------------------------------------
+                                                (1) public static void sort(List l)
+                                                
+                                                - This method is used to sort the List objects according
+to default natural sorting order. But while using this method, the List must contains homogeneous objects
+and those objects must be Comparable otherwise we will get RE saying : CCE. List must not contain null
+otherwise we will get NPE.
+                        
+                                                (2) public static void sort(List l, Comparator c)
+                                                
+                                                - This methods is used to sort the List elements according
+to customized sorting order.
+
+
+
+-for Searching purpose, this class has following methods :
+  --------------------------------------------------------                                  
+                                            (1) public int binarySearch(List l,Object target)
+                                            (2) public int binarySearch(List l,Object target,Comparator c)
+                                            
+
+- The above search methods internally use binary search algorithm. On successful search, this method will return the index of the 
+target element and on unsuccessful search this method returns the insertion point.
+- Insertion point is the location where we can place the target element in the sorted List.
+- before searching the elements , the List must be sorted otherwise we will get unexpected output.
+- If the List is sorted accrding to Comparator then while searching, we have to pass the same comparator obejct inside the search method
+otherwise we will get unpredictable output.
+*/
+import java.util.*;
+
+public class CollectiosClassDemo
+{
+    class MyComparator implements Comparator
+    {
+        public int compare(Object o1,Object o2)
+        {
+            String s1=o1.toString();
+            String s2=o2.toString();
+            return s2.compareTo(s1);
+        }
+    }
+    public static void main (String[] args)
+    {
+        ArrayList l=new ArrayList();
+        l.add("a");
+        l.add("p");
+        l.add("c");
+        l.add("t");
+        l.add("e");
+        System.out.println("List before sorting is : ");
+        System.out.print(l);
+        System.out.println();
+        System.out.println("List after sorting is : ");
+        Collections.sort(l);// the elements would be sorted according to default natural sorting order.
+        System.out.println(l);
+        //l.add(null);//NPE
+        //l.add(new Integer(50));//CCE
+        //Collections.sort(l);
+        
+        
+        
+        //for customized sorting 
+        CollectioClassDemo ccd=new CollectioClassDemo();
+        CollectioClassDemo.MyComparator mc=ccd.new MyComparator();
+        Collections.sort(l,mc);// the elements would be sorted according to customized sorting order.
+        System.out.println(l);
+    }
+}
+
+public class SearchingListElementsDemo
+{
+    class MyComparator implements Comparator
+    {
+        public int compare(Object o1,Object o2)
+        {
+            String s1=o1.toString();
+            String s2=o2.toString();
+            return s2.compareTo(s1);
+        }
+    }
+    public static void main (String[] args)
+    {
+        ArrayList l=new ArrayList();
+        l.add("e");
+        l.add("t");
+        l.add("a");
+        l.add("s");
+        l.add("b");
+        l.add("q");
+        System.out.println(l);
+        
+        //default sorting
+        Collections.sort(l);
+        System.out.println(l);
+        
+        
+        // searching the target element of the List which is defaultly sorted
+        System.out.println(Collections.binarySearch(l,"t"));
+        System.out.println(Collections.binarySearch(l,"b"));
+        System.out.println(Collections.binarySearch(l,"444"));
+        
+        
+        //customized sorting
+        SearchingListElementsDemo sled=new SearchingListElementsDemo();
+        SearchingListElementsDemo.MyComparator mc=sled.new MyComparator();
+        Collections.sort(l,mc);
+        System.out.println(l);
+        
+        
+        //searching the elements of the List which is sorted customizely
+        System.out.println(Collections.binarySearch(l,"t",mc));
+        System.out.println(Collections.binarySearch(l,"b",mc));
+        System.out.println(Collections.binarySearch(l,"444",mc));        
+    }
+}
+
+/*
+For reversing the elements of the List, the Collections class has following 2 methods.
+                            
+                            (1) public static void reverse(List l)
+                            - Used to reverse the elements of default sorted List.
+                            
+                            (2) public static Comparator reverseOrder(Comparator c)
+                            - Used to reverse the Comparator functionality.
+                  
+*/
+import java.util.*;
+class ReverseingElementsDemo
+{
+    class MyComparator implements Comparator
+    {
+        public int compare(Object o1,Object o2)
+        {
+            String s1=o1.toString();
+            String s2=o2.toString();
+            return s2.compareTo(s1);
+        }
+    }
+    public static void main (String[] args)
+    {
+        //for default sorted List
+        ArrayList l=new ArrayList();
+        l.add("a");
+        l.add("p");
+        l.add("c");
+        l.add("t");
+        l.add("e");
+        System.out.println("elements before reversing : ");
+        System.out.println(l);
+        Collections.reverse(l);
+        System.out.println("elements after reversing : ");
+        System.out.println(l);
+        
+        
+        
+        //for customized sorted List
+        ReverseingElementsDemo red=new ReverseingElementsDemo();
+        ReverseingElementsDemo.MyComparator mc=red.new MyComparator();
+        
+        //getting the elements before reversing the Comparator
+        Collections.reverse(l,mc);
+        System.out.println(l);
+        
+        //getting the elements after reversing the Comparator
+        Comparator c=Collections.reverseorder(mc);
+        Collections.reverse(l,c);
+        System.out.println(l);
+    }
+}
+/*
 Arrays class
 ------------
 
